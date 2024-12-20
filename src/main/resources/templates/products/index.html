@@ -53,9 +53,9 @@
                     <td><img th:src = "@{'/images/'+${product.imageFileName}}" alt="..." height="100" width="100"></td>
                     <td th:text="${product.name}"></td>
                     <td th:text="${product.price}"></td>
-                    <td >
-                        <a class="btn btn-primary" th:herf="@{/product/Update(id=${product.id})}"> Update </a>
-                        <a class="btn btn-danger"th:herf="@{/product/delete (id=${product.id})}" onclick="return confirm('delete permanently')"> Delete </a>
+                    <td style="white-space: nowrap">
+                        <a class="btn btn-primary btn-sm" th:href="@{/products/edit(id=${product.id})}"> update </a>
+                        <a class="btn btn-danger btn-sm" th:href="@{/products/delete (id=${product.id})}" onclick="return confirm('delete permanently')"> Delete </a>
                     </td>
                 </tr>
             </tbody>

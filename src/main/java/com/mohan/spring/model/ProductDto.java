@@ -3,6 +3,7 @@
 
 package com.mohan.spring.model;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -78,6 +79,11 @@ public class ProductDto {
 
     public void setImageFileName(MultipartFile imageFileName) {
         this.imageFileName = imageFileName;
+    }
+
+    public Sort getImage() {
+
+        throw new UnsupportedOperationException("Unimplemented method 'getImage'");
     }
 
 }

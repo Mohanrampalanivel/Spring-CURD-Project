@@ -1,0 +1,118 @@
+<!-- 28. page for edit products (just copy pasted the create products html and will edit it ) -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPRING</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">        
+    <div class="row" >
+        <div class="col-md-8 mx-auto rounded border p-4 m-4" style="background-color: lightsteelblue;">
+            <h2 class="text-center mb-5">Edit Product</h2>
+        
+     <!-- copy pasted the name div  -->
+      <form method="post" enctype="multipart/form-data" th:object="${productDto}">         
+        <div class="row mb-3"> 
+            <label class="col-sm-4 col-form-label">ID</label>   <!-- name changed ti id -->
+            <div class="col-sm-8"> 
+                <input readonly class="form-control-plaintext" th:value="${product.id}">  <!-- we have to see th product id (thymeleaf value),readonly -->
+            </div>
+        </div>
+
+        <div class="row mb-3">  <!-- inside the form 2nd row ceated by div -->
+            <label class="col-sm-4 col-form-label">NAME</label>  <!-- in that row, column 1 for textlabel as name -->
+            <div class="col-sm-8"> <!-- in that same row, column 2 -->
+                <input class="form-control" th:field="${productDto.name}"> <!-- for input text,for the productdto field name -->
+                <p th:if="${#fields.hasErrors('name')}" th:errorclass="text-danger" th:errors="${productDto.name}"></p> <!-- if there is any error in this , error msg will come in res colour -->
+            </div>
+        </div>
+
+        <div class="row mb-3">  <!-- inside the form 3rd row ceated by div -->
+            <label class="col-sm-4 col-form-label"> BRAND</label>  <!-- in that row, column 1 for textlabel as brand -->
+            <div class="col-sm-8"> <!-- in that same row, column 2 -->
+                <input class="form-control" th:field="${productDto.brand}"> <!-- for input text,for the productdto field brand -->
+                <p th:if="${#fields.hasErrors('brand')}" th:errorclass="text-danger" th:errors="${productDto.brand}"></p> <!-- if there is any error in this , error msg will come in res colour -->
+            </div>
+        </div>
+
+        <div class="row mb-3">  <!-- inside the form 4th row ceated by div -->
+            <label class="col-sm-4 col-form-label">Category</label>  <!-- in that row, column 1 for textlabel as category -->
+            <div class="col-sm-8"> <!-- in that same row, column 2 -->
+                <select class="form-control" th:field="${productDto.category}"> <!-- for select type(list),for the productdto field category -->
+                    <option value="other">other</option>
+                    <option value="Gadgets">Gadgets</option>
+                    <option value="Software">Software</option>
+                    <option value="Computers">Computers</option>
+                    <option value="Fashion">Fashion</option>
+                    <option value="Accessories">Accessories</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Shoes">Shoes</option>
+                    <option value="Automotive">Automotive</option>
+                </select>
+                <p th:if="${#fields.hasErrors('category')}" th:errorclass="text-danger" th:errors="${productDto.category}"></p> <!-- if there is any error in this , error msg will come in res colour -->
+            </div>
+        </div>
+
+        <div class="row mb-3">  <!-- inside the form 5th row ceated by div -->
+            <label class="col-sm-4 col-form-label"> PRICE</label>  <!-- in that row, column 1 for textlabel as price -->
+            <div class="col-sm-8"> <!-- in that same row, column 2 -->
+                <input class="form-control" type="number" step="0.01" min="0" th:field="${productDto.price}"> <!-- for input text,for the productdto field price -->
+                <p th:if="${#fields.hasErrors('price')}" th:errorclass="text-danger" th:errors="${productDto.price}"></p> <!-- if there is any error in this , error msg will come in res colour -->
+            </div>
+        </div>
+
+        <div class="row mb-3">  <!-- inside the form 6th row ceated by div -->
+            <label class="col-sm-4 col-form-label">DESCRIPTION</label>  <!-- in that row, column 1 for textlabel as description -->
+            <div class="col-sm-8"> <!-- in that same row, column 2 -->
+                <textarea class="form-control" th:field="${productDto.description}"></textarea> <!-- for input textarea,for the productdto field description -->
+                <p th:if="${#fields.hasErrors('description')}" th:errorclass="text-danger" th:errors="${productDto.description}"></p> <!-- if there is any error in this , error msg will come in res colour -->
+            </div>
+        </div>
+
+
+         <!-- newly added in edit page for show current image of the id start-->
+          <div class="row mb-3">
+            <div class="offset-sm-4 col-sm-8">
+                <img th:src="@{'/images/'+${product.imageFileName}}"  alt="..." width="150">
+            </div>
+          </div>
+          <!-- newly added in edit page for show current image of the id end-->
+
+        <div class="row mb-3">  <!-- inside the form 6th row ceated by div -->
+            <label class="col-sm-4 col-form-label">IMAGE</label>  <!-- in that row, column 1 for textlabel as imageFileName -->
+            <div class="col-sm-8"> <!-- in that same row, column 2 -->
+                <input class="form-control" type="file" th:field="${productDto.imageFileName}"> <!-- for input file,for the productdto field imageFileName -->
+                <p th:if="${#fields.hasErrors('imageFileName')}" th:errorclass="text-danger" th:errors="${productDto.imageFileName}"></p> <!-- if there is any error in this , error msg will come in res colour -->
+            </div>
+        </div>
+
+        <!-- newly added in edit page for date of creating the product of the id start-->
+        <div class="row mb-3">
+            <label class="col-sm-8 col-form-label">CreatedAt</label>
+                <div class="col-sm-8 ">
+                    <input readonly class="form-control-plaintext" th:value="${product.CreatedAt}">
+                </div>
+        </div>
+          <!-- newly added in edit page for show current image of the id end-->
+
+        <div class="row"> <!-- inside the form 7th row ceated by div -->
+            <div class="offset-sm-4 col-sm-4 d-grid"> <!-- in that row,for submit button -->
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <div class="col-sm-4 d-grid"> <!-- in that row,for cancel button -->
+                <a class="btn btn-outline-primary" href="/products" role="button">Cancel</a>
+            </div>
+        </div>
+
+     </form>
+    </div>
+</div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
